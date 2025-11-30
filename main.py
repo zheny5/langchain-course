@@ -8,6 +8,7 @@ from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 from langchain_tavily import TavilySearch
 
 
@@ -26,7 +27,8 @@ class AgentResponse(BaseModel):
     )
 
 
-llm = ChatOpenAI(model="gpt-5")
+# llm = ChatOpenAI(model="gpt-5")
+llm = ChatDeepSeek(model="deepseek-chat")
 tools = [TavilySearch()]
 agent = create_agent(model=llm, tools=tools, response_format=AgentResponse)
 
