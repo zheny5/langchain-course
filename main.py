@@ -4,12 +4,14 @@ load_dotenv()
 
 from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 from langchain_tavily import TavilySearch
 
 from schemas import AgentResponse
 
 tools = [TavilySearch()]
-llm = ChatOpenAI(model="gpt-4o")
+# llm = ChatOpenAI(model="gpt-4o")
+llm = ChatDeepSeek(model="deepseek-chat")
 
 
 agent = create_agent(
