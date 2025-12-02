@@ -3,8 +3,9 @@ from typing import List
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, ToolMessage
 from langchain.tools import tool, BaseTool
-from langchain_openai import ChatOpenAI
 
+from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 from callbacks import AgentCallbackHandler
 
 load_dotenv()
@@ -32,10 +33,16 @@ if __name__ == "__main__":
     print("Hello LangChain Tools (.bind_tools)!")
     tools = [get_text_length]
 
-    llm = ChatOpenAI(
+    # llm = ChatOpenAI(
+    #     temperature=0,
+    #     callbacks=[AgentCallbackHandler()],
+    # )
+    llm = ChatDeepSeek(
+        model="deepseek-chat",
         temperature=0,
         callbacks=[AgentCallbackHandler()],
     )
+
     llm_with_tools = llm.bind_tools(tools)
 
     # Start conversation
