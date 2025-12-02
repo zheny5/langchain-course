@@ -6,18 +6,20 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langchain_deepseek import ChatDeepSeek
 from langchain_tavily import TavilySearch
-
+from prompt import REACT_PROMPT_WITH_FORMAT_INSTRUCTIONS
 from schemas import AgentResponse
+
 
 tools = [TavilySearch()]
 # llm = ChatOpenAI(model="gpt-4o")
 llm = ChatDeepSeek(model="deepseek-chat")
-
+systemprompt = REACT_PROMPT_WITH_FORMAT_INSTRUCTIONS
 
 agent = create_agent(
     model=llm,
     tools=tools,
     response_format=AgentResponse,
+    system_prompt=systemprompt,
 )
 
 
@@ -32,6 +34,7 @@ def main():
             ]
         }
     )
+    print(result)
     # Access structured response from the agent
     structured = result.get("structured_response", None)
     print(structured if structured is not None else result)
